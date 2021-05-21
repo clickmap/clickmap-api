@@ -1,7 +1,13 @@
 import { Controller, Get, Post, Body } from '@nestjs/common';
 import { AppService } from './app.service';
 
+class StartEvent {
+  id: number
+  html: string
+}
+
 class ClickEvent {
+  id: number
   screenX: number
   screenY: number
   clientX: number
@@ -19,6 +25,12 @@ export class AppController {
 
   @Post('/enqueue')
   create(@Body() event: ClickEvent) {
-    console.log('received POST')
+    console.log('id: ' + event.id)
+  }
+
+  @Post('start')
+  start(@Body() event: StartEvent) {
+    console.log('id: ' + event.id)
+    console.log(event.html)
   }
 }
