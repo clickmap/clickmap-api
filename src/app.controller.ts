@@ -1,5 +1,12 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Post, Body } from '@nestjs/common';
 import { AppService } from './app.service';
+
+class ClickEvent {
+  screenX: number
+  screenY: number
+  clientX: number
+  clientY: number
+}
 
 @Controller()
 export class AppController {
@@ -8,5 +15,10 @@ export class AppController {
   @Get()
   getHello(): string {
     return this.appService.getHello();
+  }
+
+  @Post('/enqueue')
+  create(@Body() event: ClickEvent) {
+    console.log('received POST')
   }
 }
